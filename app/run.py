@@ -1,7 +1,10 @@
 import json
-
+from pathlib import Path
 from flask import Flask
 from flask import render_template, request, jsonify
+
+from dog_classifier import DogBreedClassifier
+from detector_models import DogDetector, DogBreedDetector, HumanFaceDetector
 
 
 app = Flask(__name__)
@@ -16,13 +19,7 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/index")
 def index():
-    pass
-
-
-# web page that handles user query and displays model results
-@app.route("/go")
-def go():
-    pass
+    return render_template("index.html")
 
 
 def main():
