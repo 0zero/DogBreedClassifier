@@ -27,7 +27,6 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="index">Home <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="https://github.com/0zero/DogBreedClassifier">Project Repository</a>
     </div>
   </div>
@@ -36,16 +35,18 @@
 
 <div class="jumbotron bg-light">
     <div class="container">
-        <h1 class="text-center">What kind of DOG is this?!</h1>
-        <p class="text-center">In a world where everything is a kind of dog, what kind of dog are you? </p>
+        <h1 class="text-center">What type of DOG is this?</h1>
+        <p class="text-center">In a world where everything is a dog, what kind of dog are you? </p>
         <hr />
       
         <div class="row">
             <div class="col-lg-12 form-group-lg">
-                <form action="/go" method="get">
-                    <input type="text" class="form-control form-control-lg" name="query" placeholder="Enter a message to classify">
+                <label for="formFileLg" class="form-label">What type of dog is this???</label>
+
+                <form action="/getdoggy" method="POST" enctype="multipart/form-data">
+                    <input type="file" class="form-control form-control-lg" name="user-image" placeholder="Enter a message to classify">
                     <div class="col-lg-offset-5">
-                        <button type="submit" class="btn btn-lg btn-success">What kind of dog is this?? </button>
+                        <button type="submit" class="btn btn-lg btn-success"> Upload image </button>
                     </div>
                 </form>
             </div>
@@ -59,7 +60,7 @@
 <div class="container">
     {% block content %}
         <div class="page-header">
-            <h1 class="text-center">Overview of Training Dataset</h1>
+            <h1 class="text-center"></h1>
         </div>
     {% endblock %}
 
@@ -68,14 +69,6 @@
         <br /><br />
     {% endfor %}
 </div>
-
-<script type="text/javascript">
-    const graphs = {{graphJSON | safe}};
-    const ids = {{ids | safe}};
-    for(let i in graphs) {
-        Plotly.plot(ids[i], graphs[i].data, graphs[i].layout);
-    }
-</script>
 
 </body>
 </html>

@@ -14,25 +14,29 @@ class DogBreedClassifier:
         self.face_detector_model: HumanFaceDetector = face_detector
         self.dog_breed_detector_model: DogBreedDetector = dog_breed_detector
 
-    def classify_image(self, image_path: str) -> None:
+    def classify_image(self, image) -> None:
 
-        show_image(image_path)
+        show_image(image)
 
         print("Evaluating image...")
 
-        breed_prediction = self.dog_breed_detector_model.predict_dog_breed(image_path)
+        breed_prediction = self.dog_breed_detector_model.predict_dog_breed(image)
 
-        if self.dog_detector_model.is_dog(image_path):
+        if self.dog_detector_model.is_dog(image):
             msg = f"Looks like you've provided a picture of a {breed_prediction} dog."
-        if self.face_detector_model.is_human_face(image_path):
+
+        elif self.face_detector_model.is_human_face(image):
+
             msg = (
                 "Looks like you've provided a picture human that "
                 f"looks like a {breed_prediction} dog."
             )
         else:
+
             msg = (
                 "You haven't provided a dog or human picture but "
                 f"whatever it is, it looks like a {breed_prediction} dog."
             )
 
         print(msg)
+        return breed_prediction
