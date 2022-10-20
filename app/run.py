@@ -1,7 +1,8 @@
+import base64
 import io
 from pathlib import Path
 from flask import Flask
-from flask import render_template, jsonify, request
+from flask import render_template, request
 from PIL import Image
 
 from dog_classifier import DogBreedClassifier
@@ -44,11 +45,15 @@ def getdoggy():
         user_image = Image.open(io.BytesIO(user_image))
 
         prediction = dog_classifier.classify_image(user_image)
+        display_image = io.BytesIO()
+        user_image.save(display_image, "PNG", quality=100)
+        display_image.seek(0)
+        test = base64.b64encode(display_image.getvalue()).decode("ascii")
 
     return (
-        render_template("index.html", data=prediction)
+        render_template("index.html", data=[prediction, test])
         if prediction
-        else render_template("index.html", data="FAILED")
+        else render_template("index.html")
     )
 
 

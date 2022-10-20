@@ -27,6 +27,7 @@ class HumanFaceDetector:
         return CascadeClassifier("haarcascades/haarcascade_frontalface_alt.xml")
 
     def is_human_face(self, input_image) -> bool:
+        input_image = input_image.convert("RGB")
         prediction = self.model.detectMultiScale(
             cvtColor(np.asarray(input_image), cv2.COLOR_BGR2GRAY)
         )
@@ -55,5 +56,12 @@ class DogBreedDetector:
         predicted_vector = self.model.predict(features)
         dog_breed = " ".join(
             self.dog_names[np.argmax(predicted_vector)].split(".")[-1].split("_")
+        )
+        print(np.round(predicted_vector, 2) * 100)
+        print(predicted_vector[0])
+        print(
+            np.argmax(predicted_vector),
+            np.argmax(predicted_vector[0]),
+            self.dog_names[np.argmax(predicted_vector)],
         )
         return dog_breed
