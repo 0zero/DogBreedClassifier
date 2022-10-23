@@ -12,6 +12,8 @@ ALLOWED_EXTENSIONS = [".png", ".jpg", ".jpeg"]
 
 app = Flask(__name__)
 
+# TODO: cache these models because something seems to take ages to get going
+
 # load model
 dog_detector = DogDetector()
 face_detector = HumanFaceDetector()
@@ -54,16 +56,15 @@ def getdoggy():
     if check_image(request):
         user_image = request.files["user-image"].read()
         user_image = Image.open(io.BytesIO(user_image))
-        print(type(user_image))
 
         prediction = dog_classifier.classify_image(user_image)
         display_image = io.BytesIO()
         user_image.save(display_image, "PNG", quality=100)
         display_image.seek(0)
-        test = base64.b64encode(display_image.getvalue()).decode("ascii")
+        display_image = base64.b64encode(display_image.getvalue()).decode("ascii")
 
     return (
-        render_template("index.html", data=[prediction, test])
+        render_template("index.html", data=[prediction, display_image])
         if prediction
         else render_template("index.html")
     )

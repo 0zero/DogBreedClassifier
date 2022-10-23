@@ -10,9 +10,6 @@ def path_to_tensor(image_input: JpegImageFile) -> np.array:
     :param image_input: image to be turned into a tensor
     :return: tensor appropriate for use by classifier models
     """
-    # loads RGB image as PIL.Image.Image type
-    # img = image.load_img(image_path, target_size=(224, 224))
-    image_input = image_input.convert("RGB")
 
     img = image_input.resize((224, 224))
     # convert PIL.Image.Image type to 3D tensor with shape (224, 224, 3)

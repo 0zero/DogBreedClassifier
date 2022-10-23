@@ -4,8 +4,8 @@ import numpy as np
 
 from cv2 import CascadeClassifier, cvtColor
 from helpers import path_to_tensor
-from keras.applications import ResNet50, Xception
-from keras.applications import imagenet_utils
+from keras.applications.resnet50 import ResNet50, preprocess_input as RNpreprocess
+from keras.applications.xception import Xception, preprocess_input as Xpreprocess
 from keras.models import load_model
 from typing import List
 from PIL.JpegImagePlugin import JpegImageFile
@@ -28,7 +28,7 @@ class DogDetector:
         :param input_image: input image to classify
         :return: True if image is predicted to be of a dog
         """
-        img = imagenet_utils.preprocess_input(path_to_tensor(input_image))
+        img = RNpreprocess(path_to_tensor(input_image))
         prediction = np.argmax(self.model.predict(img))
         return (prediction <= 268) & (prediction >= 151)
 
@@ -50,7 +50,6 @@ class HumanFaceDetector:
         :param input_image: input image to classify
         :return: True if image is predicted to be of a human face
         """
-        input_image = input_image.convert("RGB")
         prediction = self.model.detectMultiScale(
             cvtColor(np.asarray(input_image), cv2.COLOR_BGR2GRAY)
         )
@@ -94,17 +93,10 @@ class DogBreedDetector:
         :return: predicted dog breed
         """
         features = self.original_model.predict(
-            imagenet_utils.preprocess_input(path_to_tensor(input_image))
+            Xpreprocess(path_to_tensor(input_image))
         )
         predicted_vector = self.model.predict(features)
         dog_breed = " ".join(
             self.dog_names[np.argmax(predicted_vector)].split(".")[-1].split("_")
-        )
-        print(np.round(predicted_vector, 2) * 100)
-        print(predicted_vector[0])
-        print(
-            np.argmax(predicted_vector),
-            np.argmax(predicted_vector[0]),
-            self.dog_names[np.argmax(predicted_vector)],
         )
         return dog_breed
