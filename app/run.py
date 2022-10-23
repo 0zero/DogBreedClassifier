@@ -23,7 +23,14 @@ dog_classifier = DogBreedClassifier(
 )
 
 
-def check_image(req) -> bool:
+def check_image(req: request) -> bool:
+    """
+    Checks whether a request has files and whether they are
+    of valid format
+
+    :param req: request to validate
+    :return: boolean showing whether files in request are valid
+    """
     if "user-image" in req.files:
         if Path(req.files["user-image"].filename).suffix in ALLOWED_EXTENSIONS:
             return True
@@ -39,10 +46,15 @@ def index():
 
 @app.post("/getdoggy")
 def getdoggy():
+    """
+    Get dog breed API
 
+    :return: page and result to render
+    """
     if check_image(request):
         user_image = request.files["user-image"].read()
         user_image = Image.open(io.BytesIO(user_image))
+        print(type(user_image))
 
         prediction = dog_classifier.classify_image(user_image)
         display_image = io.BytesIO()

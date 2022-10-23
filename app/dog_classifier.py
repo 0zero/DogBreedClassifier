@@ -1,5 +1,5 @@
 from detector_models import DogBreedDetector, DogDetector, HumanFaceDetector
-from helpers import show_image
+from PIL.JpegImagePlugin import JpegImageFile
 
 
 class DogBreedClassifier:
@@ -14,11 +14,15 @@ class DogBreedClassifier:
         self.face_detector_model: HumanFaceDetector = face_detector
         self.dog_breed_detector_model: DogBreedDetector = dog_breed_detector
 
-    def classify_image(self, image) -> str:
+    def classify_image(self, image: JpegImageFile) -> str:
+        """
+        Predict breed of dog based on input image. Image does not have to be
+        of a dog.
 
-        show_image(image)
-
-        print("Evaluating image...")
+        :param image: image to be classified
+        :return: string providing classification and some fluff text
+        """
+        print(f"Evaluating image...{type(image)}")
 
         breed_prediction = self.dog_breed_detector_model.predict_dog_breed(image)
 
