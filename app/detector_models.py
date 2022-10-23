@@ -92,9 +92,7 @@ class DogBreedDetector:
 
         :return: predicted dog breed
         """
-        features = self.original_model.predict(
-            Xpreprocess(path_to_tensor(input_image))
-        )
+        features = self.original_model.predict(Xpreprocess(path_to_tensor(input_image)))
         predicted_vector = self.model.predict(features)
         dog_breed = " ".join(
             self.dog_names[np.argmax(predicted_vector)].split(".")[-1].split("_")
