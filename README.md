@@ -61,7 +61,7 @@ This will install various Python packages including `tensoflow-gpu`, `keras`, `s
 
 1. You can run the cells in the `dog_app.ipynb` notebook in the standard Jupyter Notebook way.
 
-:warning: This notebook carries out convolution neural network training and requires a good graphics card with lots of memory. I've also not included the training images to this git repository due to storage constraints. If you want to get this data, please drop me a message. :warning: 
+:warning: This notebook carries out convolutional neural network training and requires a good graphics card with lots of memory. I've also not included the training images to this git repository due to storage constraints. If you want to get this data, please drop me a message. :warning: 
 
 
 ## File descriptions
