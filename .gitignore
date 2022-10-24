@@ -134,3 +134,4 @@ dmypy.json
 # conda
 noarch/
 
+*.npz
