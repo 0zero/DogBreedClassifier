@@ -17,12 +17,13 @@ The final model achieves a test accuracy of ~$82\,\%$ and the training and valid
 <figcaption align = "left"><b>Fig.1</b> - Xception model train and validation accuracy and loss. </figcaption>
 </figure>
 
-In the corresponding web-app, a user can upload an image file and check what dog breed the model predicts as seen in Figure 2.
+<br>In the corresponding web-app, a user can upload an image file and check what dog breed the model predicts as seen in Figure 2.
 
 <figure>
 <img src="./images/dog_app_screenshot.png" alt="dogapp" style="width:75%">
 <figcaption align = "left"><b>Fig.2</b> - Webapp example of model correctly predicting the breed as Pomenarian. </figcaption>
 </figure>
+<br>
 
 ## Using the model
 ### Environment Setup Instructions:
@@ -53,7 +54,7 @@ This will install various Python packages including `tensoflow-gpu`, `keras`, `s
 
 4. Wait for the app to return the model's prediction and see if you agree with its findings.
 
-:information_source: The app can take a bit of time to get going the first time around. I need to improve this by adding some caching. :information_source: 
+:information_source: The app can take a bit of time to get going the first time around. Caching may improve this. :information_source: 
 
 
 ### Notebook run Instructions:
