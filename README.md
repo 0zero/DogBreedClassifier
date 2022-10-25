@@ -1,4 +1,4 @@
-# DogBreedClassifier
+# Dog Breed Classifier
 
 ## Project Brief
 
